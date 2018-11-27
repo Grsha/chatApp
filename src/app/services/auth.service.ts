@@ -23,17 +23,23 @@ constructor(private afAuth: AngularFireAuth,
     return this.user;
   }
 
+  logout() {
+    this.afAuth.auth.signOut();
+    this.router.navigate(['login']);
+  }
+
   get currentUserId(): string {
     return this.authState !== null ? this.authState.uid : '';
   }
 
   login(email: string, password:string) {
       return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-        .then((resolve) => {
-          const status = 'online';
-          this.setUserStatus(status);
+        .then((user) => {
+          this.authState = user;
+          console.log('authState: ', this.authState);
+          this.setUserStatus('online');
           this.router.navigate(['chat']);
-        })
+        });
   }
 
   signUp(email: string, password: string, displayName: string){

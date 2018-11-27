@@ -1,0 +1,18 @@
+<div class="navBar">
+  <div id="logo"></div>
+  <div id="heading"><a routerLink="/">basechat</a></div>
+  <div class="links">
+    <span>
+      <a *ngIf="!userEmail" href="#" (click)="login()">Login</a>
+    </span>
+    <span>
+      <a *ngIf="!userEmail" routerLink="/signup">Sign Up</a>
+    </span>
+    <span>
+      <span *ngIf="userEmail" id="userEmail">Hello, {{userEmail}}</span>
+    </span>
+    <span>
+      <a *ngIf="userEmail" href="#" (click)="logout()">Logout</a>
+    </span>
+  </div>
+</div>
